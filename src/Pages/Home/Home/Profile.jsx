@@ -1,124 +1,61 @@
-import React, { useState, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
+
 import axios from 'axios';
+import { AuthContext } from '../../../provider/AuthProvider';
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
-  const [profile, setprofile] = useState(null);
-  const [editing, setEditing] = useState(false);
+  const { user } = useContext(AuthContext);
+  const [profileData, setProfileData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch user data from the server
-    axios
-      .get('https://endgame-task-server.vercel.app/users')
-      .then((response) => {
-        setprofile(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching profile data:', error);
-      });
-  }, []);
-console.log(profile)
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUser((prevUser) => ({
-      ...prevUser,
-      [name]: value
-    }));
-  };
+    // Fetch profile data based on the user's email
+    if (user?.email) {
+      axios
+        .get(`https://endgame-task-server.vercel.app/users?email=${user.email}`)
+        .then((response) => {
+          setProfileData(response.data[0]);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error('Error fetching profile data:', error);
+          setLoading(false);
+        });
+    }
+  }, [user?.email]);
 
-  const handleSave = () => {
-    // Make an API call to save the updated user data to the server
-    axios
-      .put('https://endgame-task-server.vercel.app/users', user)
-      .then((response) => {
-        setEditing(false);
-      })
-      .catch((error) => {
-        console.error('Error saving user data:', error);
-      });
-  };
+  if (loading) {
+    return <progress className="progress w-56"></progress>;
+  }
 
-  if (!profile) {
-    return (
-      <div className="flex justify-center items-center h-60">
-        <p>Loading...</p>
-      </div>
-    );
+  if (!profileData) {
+    return <p>Profile data not found</p>;
   }
 
   return (
     <div className="p-4">
-      <h2 className="text-3xl font-bold mb-6">Profile</h2>
+      <h2 className="text-2xl font-bold mb-4">Profile Details</h2>
       <div className="mb-4">
-        <label className="font-semibold">Name:{profile.name}</label>
-        {editing ? (
-          <input
-            type="text"
-            name="name"
-            value={profile.name}
-            onChange={handleInputChange}
-            className="border border-gray-300 rounded-md px-2 py-1"
-          />
-        ) : (
-          <span>{profile.name}</span>
-        )}
+        <h3 className="text-xl font-semibold">Name:</h3>
+        <p className="text-gray-600 text-lg">{profileData.name}</p>
       </div>
       <div className="mb-4">
-        <label className="font-semibold">Email:</label>
-        {editing ? (
-          <input
-            type="email"
-            name="email"
-            value={profile.email}
-            onChange={handleInputChange}
-            className="border border-gray-300 rounded-md px-2 py-1"
-          />
-        ) : (
-          <span>{profile.email}</span>
-        )}
+        <h3 className="text-xl font-semibold">Email:</h3>
+        <p className="text-gray-600 text-lg">{profileData.email}</p>
       </div>
       <div className="mb-4">
-        <label className="font-semibold">University:</label>
-        {editing ? (
-          <input
-            type="text"
-            name="university"
-            value={profile.university}
-            onChange={handleInputChange}
-            className="border border-gray-300 rounded-md px-2 py-1"
-          />
-        ) : (
-          <span>{profile.university}</span>
-        )}
+        <h3 className="text-xl font-semibold">University:</h3>
+        <p className="text-gray-600 text-lg">{profileData.university}</p>
       </div>
       <div className="mb-4">
-        <label className="font-semibold">Address:</label>
-        {editing ? (
-          <input
-            type="text"
-            name="address"
-            value={profile.address}
-            onChange={handleInputChange}
-            className="border border-gray-300 rounded-md px-2 py-1"
-          />
-        ) : (
-          <span>{profile.address}</span>
-        )}
+        <h3 className="text-xl font-semibold">Address:</h3>
+        <p className="text-gray-600 text-lg">{profileData.address}</p>
       </div>
-      {editing ? (
-        <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
-          onClick={handleSave}
-        >
-          Save
-        </button>
-      ) : (
-        <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
-          onClick={() => setEditing(true)}
-        >
-          Edit
-        </button>
-      )}
+      <div>
+        <Link to="/updateUser"><button  className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
+          >Edit</button></Link>
+      </div>
     </div>
   );
 };
