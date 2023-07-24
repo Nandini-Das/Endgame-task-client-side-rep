@@ -14,8 +14,33 @@ const RecommendedResearchPapers = () => {
       publication: "Environmental Science Review",
       year: "2021",
     },
-    // Add more research papers as needed
+    {
+      title: "Advancements in Quantum Computing: Challenges and Opportunities",
+      authors: "David Lee, Jessica Chen",
+      publication: "Quantum Computing Journal",
+      year: "2023",
+    },
+    {
+      title: "Machine Learning Algorithms for Predicting Stock Market Trends",
+      authors: "Alex Johnson, Rachel Davis",
+      publication: "Financial Analytics Quarterly",
+      year: "2022",
+    },
+    {
+      title: "A Comparative Study of Deep Learning Models for Natural Language Processing",
+      authors: "Jennifer Miller, Robert Wilson",
+      publication: "International Journal of AI Research",
+      year: "2021",
+    },
+    {
+      title: "Understanding Cybersecurity Threats in the Internet of Things (IoT)",
+      authors: "Michael Williams, Laura Evans",
+      publication: "Cybersecurity Review",
+      year: "2023",
+    },
+
   ];
+
 
   return (
     <div className="p-4">

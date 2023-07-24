@@ -76,11 +76,11 @@ const Navigation = () => {
         {/* Login Button */}
         <div className="flex items-center">
             {user && (
-              <button
-                className="btn btn-neutral  float-end h-12 rounded-full object-cover mr-4">
-                 
-           {user.displayName}
-                </button>
+              <Link to="/userProfile"><button
+              className="btn btn-neutral  float-end h-12 rounded-full object-cover mr-4">
+               
+         {user.displayName}
+              </button></Link>
             )}
             {user ? (
               <>

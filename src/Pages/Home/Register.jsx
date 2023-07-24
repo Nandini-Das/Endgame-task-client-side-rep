@@ -15,6 +15,8 @@ const Register = () => {
         const form = event.target;
         const name = form.name.value;
         const email = form.email.value;
+        const university = form.university.value;
+        const address = form.address.value;
         const password = form.password.value;
         const photo = form.photo.value;
       
@@ -42,8 +44,10 @@ const Register = () => {
           })
             .then(() => {
               const saveUser = {
-                name: name, // Corrected the variable name here
-                email: email, // Corrected the variable name here
+                name: name, 
+                email: email, 
+                university: university,
+                address: address,
                 role: 'student',
               };
               // Send the user data to the server using a POST request
@@ -95,6 +99,18 @@ const Register = () => {
                                     <span className="label-text">Email</span>
                                 </label>
                                 <input type="text" name='email' placeholder="Email" className="input input-bordered" />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">University</span>
+                                </label>
+                                <input type="text" name='university' placeholder="Your Current University" className="input input-bordered" />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Address</span>
+                                </label>
+                                <input type="text" name='address' placeholder="Your Address" className="input input-bordered" />
                             </div>
                             <div className="form-control">
                                 <label className="label">
