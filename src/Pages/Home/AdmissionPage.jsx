@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { FaPlus } from 'react-icons/fa';
-import MyCollegeForm from './MyCollegeForm';
+
 
 const AdmissionPage = () => {
   const [colleges, setColleges] = useState([]);
@@ -45,7 +45,7 @@ const AdmissionPage = () => {
               <Link
                 to={`/myCollegeForm/${college._id}`}
                 className="text-primary"
-              >
+              >Apply
                 <FaPlus className="text-xl" />
               </Link>
             </div>

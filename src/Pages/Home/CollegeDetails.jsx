@@ -53,46 +53,67 @@ const CollegeDetails = () => {
 
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">{college.collegeName} Details</h2>
+   <>
+   <h2 className="text-2xl font-bold mb-4 text-center p-3">{college.collegeName} </h2>
+   <div className="p-4 flex flex-col md:flex-row md:items-center md:space-x-8">
+      {/* College Image */}
       <img
         src={college.collegeImage}
         alt={college.collegeName}
-        className="w-full h-60 object-cover rounded-lg mb-4"
+        className="w-full h-96 object-cover rounded-lg md:w-1/2 md:h-auto"
       />
-       <div className="mb-4">
-        <h3 className="text-xl font-semibold">College Rating:</h3>
-        {renderCollegeRating(college.collegeRating)}
-      </div>
-      <div className="mb-4">
-        <h3 className="text-xl font-semibold">Admission Date:</h3>
-        <p className="text-gray-600 text-lg">{college.admissionDate}</p>
-      </div>
-      <div className="mb-4">
-        <h3 className="text-xl font-semibold">Number of Research Works:</h3>
-        <p className="text-gray-600 text-lg">{college.researchWorks}</p>
-      </div>
-      <div className="mb-4">
-        <h3 className="text-xl font-semibold">Events:</h3>
-        <ul className="list-disc list-inside">
-          {college.events.map((event, index) => (
-            <li key={index} className="text-gray-600 text-lg">
-              {event}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="mb-4">
-        <h3 className="text-xl font-semibold">Sports Facilities:</h3>
-        <ul className="list-disc list-inside">
-          {college.sports.map((sport, index) => (
-            <li key={index} className="text-gray-600 text-lg">
-              {sport}
-            </li>
-          ))}
-        </ul>
+
+      {/* College Details */}
+      <div className="md:w-1/2">
+        <h2 className="text-2xl font-bold mb-4">Additional Details</h2>
+
+        {/* College Rating */}
+        <div className="mb-4">
+          <h3 className="text-xl font-semibold">College Rating:</h3>
+          {renderCollegeRating(college.collegeRating)}
+        </div>
+
+        {/* Admission Date */}
+        <div className="mb-4">
+          <h3 className="text-xl font-semibold">Admission Date:</h3>
+          <p className="text-gray-600 text-lg">{college.admissionDate}</p>
+        </div>
+
+        {/* Number of Research Works */}
+        <div className="mb-4">
+          <h3 className="text-xl font-semibold">Number of Research Works:</h3>
+          <p className="text-gray-600 text-lg">{college.researchWorks}</p>
+        </div>
+
+        {/* Events and Sports Facilities */}
+        <div className="flex mb-4">
+          {/* Events */}
+          <div className="mr-8">
+            <h3 className="text-xl font-semibold">Events:</h3>
+            <ul className="list-disc list-inside">
+              {college.events.map((event, index) => (
+                <li key={index} className="text-gray-600 text-lg">
+                  {event}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Sports Facilities */}
+          <div>
+            <h3 className="text-xl font-semibold">Sports Facilities:</h3>
+            <ul className="list-disc list-inside">
+              {college.sports.map((sport, index) => (
+                <li key={index} className="text-gray-600 text-lg">
+                  {sport}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
+   </>
   );
 };
 

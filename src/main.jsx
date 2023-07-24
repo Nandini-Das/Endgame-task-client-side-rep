@@ -15,12 +15,14 @@ import CollegeDetails from './Pages/Home/CollegeDetails';
 import AdmissionPage from './Pages/Home/AdmissionPage';
 import MyCollegeForm from './Pages/Home/MyCollegeForm';
 import MyCollege from './Pages/Home/MyCollege';
+import NotFound from './Pages/Home/Home/NotFound';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <NotFound></NotFound>,
     children: [
       {
         path: "/",
